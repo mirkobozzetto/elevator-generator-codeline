@@ -8,8 +8,18 @@ export default function Home() {
   const [image, setImage] = useState();
 
   const handleFileChange = (e: FileChangeEvent) => {
-    const file = e.target.files?.[0];
     console.log(e.target.files?.[0]);
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          alert(img.width + " " + img.height);
+        };
+      };
+      console.log(reader.readAsDataURL(file));
+    }
   };
 
   return (
