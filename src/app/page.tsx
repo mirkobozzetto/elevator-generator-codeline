@@ -1,54 +1,36 @@
 "use client";
-
 import { FileChangeEvent, ImageState } from "@/types/types";
+import { handleFileChange } from "@/utils/imagePreviewUtil";
 import { useState } from "react";
+import ImagePreview from "./components/ImagePreview";
+import InputFile from "./components/InputFile";
 
 export default function Home() {
-  const [settings, setSettings] = useState();
+  // const [settings, setSettings] = useState("");
+
   const [image, setImage] = useState<ImageState | undefined>(undefined);
+  const [padding, setPadding] = useState(0);
+  const [shadow, setShadow] = useState(0);
+  const [radius, setRadius] = useState(0);
 
-  const handleFileChange = (e: FileChangeEvent) => {
-    const files = e.target.files;
-    const file = files?.[0];
-    // console.log(e.target.files?.[0]);
-
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      const img = new Image();
-
-      img.onload = () => {
-        if (typeof reader.result === "string") {
-          setImage({
-            width: img.width,
-            height: img.height,
-            src: reader.result,
-          });
-        }
-      };
-    };
+  const handleFileChangeWrapper = (e: FileChangeEvent) => {
+    handleFileChange(e, setImage);
   };
 
   return (
     <main className="flex lg:flex-row flex-col justify-center items-center gap-8 m-auto max-w-4xl min-h-full">
       <div className="bg-indigo-100 shadow-xl w-96 card">
         <div className="card-body">
-          <label className="form-control w-full max-w-xs">
-            <span className="label-text"> </span>
-            <input
-              type="file"
-              className="w-full max-w-xs file-input file-input-primary file-input-sm"
-              onChange={handleFileChange}
-            />
-          </label>
+          <InputFile onChange={handleFileChangeWrapper} />
 
           <label className="form-control w-full max-w-xs">
             <span className="mb-1 label-text">Padding</span>
             <input
               type="range"
               min={0}
-              max="100"
-              value="0"
+              max={100}
+              value={padding}
+              onChange={(e) => setPadding(Number(e.target.value))}
               className="range range-primary range-sm"
             />
           </label>
@@ -58,8 +40,9 @@ export default function Home() {
             <input
               type="range"
               min={0}
-              max="100"
-              value="0"
+              max={100}
+              value={shadow}
+              onChange={(e) => setShadow(Number(e.target.value))}
               className="range range-primary range-sm"
             />
           </label>
@@ -69,14 +52,17 @@ export default function Home() {
             <input
               type="range"
               min={0}
-              max="360"
-              value="0"
+              max={360}
+              value={radius}
+              onChange={(e) => setRadius(Number(e.target.value))}
               className="range range-primary range-sm"
             />
           </label>
         </div>
       </div>
-      <div className="ml-12 w-96 card">preview</div>
+      <div className="ml-12 w-96 card">
+        <ImagePreview image={image} />
+      </div>
     </main>
   );
 }
