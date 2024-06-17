@@ -15,7 +15,7 @@ export default function Home() {
       reader.onload = () => {
         const img = new Image();
         img.onload = () => {
-          alert(img.width + " " + img.height);
+          console.log(img.width + " " + img.height);
         };
       };
       console.log(reader.readAsDataURL(file));
