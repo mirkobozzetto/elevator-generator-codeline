@@ -12,6 +12,11 @@ export type InputFileProps = {
   onChange: (e: FileChangeEvent) => void;
 };
 
+export type ImagePreviewProps = {
+  image: ImageState | undefined;
+  settings: SettingsProps;
+};
+
 export type InputRangeProps = {
   label: string;
   min: number;
@@ -25,4 +30,9 @@ export type ImageState = {
   height: number;
   src: string;
   name: string | undefined;
+};
+
+export type ImageGeneratorProps = {
+  settings: SettingsProps;
+  image: ImageState;
 };

@@ -1,20 +1,27 @@
-import { ImageState } from "@/types/types";
+import { ImagePreviewProps } from "@/types/types";
 import Image from "next/image";
 
-type ImagePreviewProps = {
-  image: ImageState | undefined;
-};
-
-const ImagePreview = ({ image }: ImagePreviewProps) => {
+const ImagePreview = ({ image, settings }: ImagePreviewProps) => {
   return (
     <>
       {image && (
-        <Image
-          src={image.src}
-          alt={image.name ?? ""}
-          width={image.width}
-          height={image.height}
-        />
+        <div
+          style={{
+            display: "flex",
+            padding: `${settings.padding}px`,
+          }}
+        >
+          <Image
+            src={image.src}
+            alt={image.name ?? ""}
+            width={image.width}
+            height={image.height}
+            style={{
+              boxShadow: `0 0 ${settings.shadow}px rgba(0,0,0,.${settings.shadow})`,
+              borderRadius: `${settings.radius}px`,
+            }}
+          />
+        </div>
       )}
     </>
   );

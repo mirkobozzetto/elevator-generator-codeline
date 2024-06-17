@@ -3,7 +3,7 @@ import { FileChangeEvent, ImageState } from "@/types/types";
 import { handleFileChange } from "@/utils/imagePreviewUtil";
 import useSettings from "@/utils/useSettings";
 import { useState } from "react";
-import ImagePreview from "./components/ImagePreview";
+import { ImageGenerator } from "./components/ImageGenerator";
 import InputFile from "./components/InputFile";
 import InputRange from "./components/InputRange";
 
@@ -28,7 +28,7 @@ export default function Home() {
           <InputRange
             label="Padding"
             min={0}
-            max={100}
+            max={50}
             value={settings.padding}
             onChange={(e) => updateSetting("padding", Number(e.target.value))}
           />
@@ -36,7 +36,7 @@ export default function Home() {
           <InputRange
             label="Shadow"
             min={0}
-            max={100}
+            max={80}
             value={settings.shadow}
             onChange={(e) => updateSetting("shadow", Number(e.target.value))}
           />
@@ -44,14 +44,14 @@ export default function Home() {
           <InputRange
             label="Radius"
             min={0}
-            max={360}
+            max={210}
             value={settings.radius}
             onChange={(e) => updateSetting("radius", Number(e.target.value))}
           />
         </div>
       </div>
       <div className="ml-12 w-96 card">
-        <ImagePreview image={image} />
+        {image ? <ImageGenerator image={image} settings={settings} /> : null}
       </div>
     </main>
   );
