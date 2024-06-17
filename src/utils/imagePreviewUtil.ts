@@ -7,20 +7,24 @@ export const handleFileChange = (
   const files = e.target.files;
   const file = files?.[0];
 
-  const reader = new FileReader();
-  reader.onload = () => {
-    const imgElement = new Image();
-    imgElement.onload = () => {
-      if (typeof reader.result === "string") {
-        setImage({
-          width: imgElement.width,
-          height: imgElement.height,
-          src: reader.result,
-          name: file?.name,
-        });
-      }
+  if (file) {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const imgElement = new Image();
+      imgElement.onload = () => {
+        if (typeof reader.result === "string") {
+          setImage({
+            width: imgElement.width,
+            height: imgElement.height,
+            src: reader.result,
+            name: file.name,
+          });
+        }
+      };
+      imgElement.src = reader.result as string;
     };
-    imgElement.src = reader.result as string;
-  };
-  reader.readAsDataURL(file as Blob);
+    reader.readAsDataURL(file);
+  } else {
+    setImage(undefined);
+  }
 };
