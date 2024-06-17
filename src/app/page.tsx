@@ -1,25 +1,32 @@
 "use client";
 
-import { FileChangeEvent } from "@/types/types";
+import { FileChangeEvent, ImageState } from "@/types/types";
 import { useState } from "react";
 
 export default function Home() {
   const [settings, setSettings] = useState();
-  const [image, setImage] = useState();
+  const [image, setImage] = useState<ImageState | undefined>(undefined);
 
   const handleFileChange = (e: FileChangeEvent) => {
-    console.log(e.target.files?.[0]);
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const img = new Image();
-        img.onload = () => {
-          console.log(img.width + " " + img.height);
-        };
+    const files = e.target.files;
+    const file = files?.[0];
+    // console.log(e.target.files?.[0]);
+
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      const img = new Image();
+
+      img.onload = () => {
+        if (typeof reader.result === "string") {
+          setImage({
+            width: img.width,
+            height: img.height,
+            src: reader.result,
+          });
+        }
       };
-      console.log(reader.readAsDataURL(file));
-    }
+    };
   };
 
   return (
