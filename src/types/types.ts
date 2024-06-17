@@ -6,6 +6,14 @@ export type InputFileProps = {
   onChange: (e: FileChangeEvent) => void;
 };
 
+export type InputRangeProps = {
+  label: string;
+  min: number;
+  max: number;
+  value: number;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+};
+
 export type ImageState = {
   width: number;
   height: number;

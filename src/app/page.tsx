@@ -4,6 +4,7 @@ import { handleFileChange } from "@/utils/imagePreviewUtil";
 import { useState } from "react";
 import ImagePreview from "./components/ImagePreview";
 import InputFile from "./components/InputFile";
+import InputRange from "./components/InputRange";
 
 export default function Home() {
   const [image, setImage] = useState<ImageState | undefined>(undefined);
@@ -21,41 +22,29 @@ export default function Home() {
         <div className="card-body">
           <InputFile onChange={handleFileChangeWrapper} />
 
-          <label className="form-control w-full max-w-xs">
-            <span className="mb-1 label-text">Padding</span>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={padding}
-              onChange={(e) => setPadding(Number(e.target.value))}
-              className="range range-primary range-sm"
-            />
-          </label>
+          <InputRange
+            label="Padding"
+            min={0}
+            max={100}
+            value={padding}
+            onChange={(e) => setPadding(Number(e.target.value))}
+          />
 
-          <label className="form-control w-full max-w-xs">
-            <span className="mb-1 label-text">Shadow</span>
-            <input
-              type="range"
-              min={0}
-              max={100}
-              value={shadow}
-              onChange={(e) => setShadow(Number(e.target.value))}
-              className="range range-primary range-sm"
-            />
-          </label>
+          <InputRange
+            label="Shadow"
+            min={0}
+            max={100}
+            value={shadow}
+            onChange={(e) => setShadow(Number(e.target.value))}
+          />
 
-          <label className="form-control w-full max-w-xs">
-            <span className="mb-1 label-text">Radius</span>
-            <input
-              type="range"
-              min={0}
-              max={360}
-              value={radius}
-              onChange={(e) => setRadius(Number(e.target.value))}
-              className="range range-primary range-sm"
-            />
-          </label>
+          <InputRange
+            label="Radius"
+            min={0}
+            max={360}
+            value={radius}
+            onChange={(e) => setRadius(Number(e.target.value))}
+          />
         </div>
       </div>
       <div className="ml-12 w-96 card">
