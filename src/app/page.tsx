@@ -6,8 +6,6 @@ import ImagePreview from "./components/ImagePreview";
 import InputFile from "./components/InputFile";
 
 export default function Home() {
-  // const [settings, setSettings] = useState("");
-
   const [image, setImage] = useState<ImageState | undefined>(undefined);
   const [padding, setPadding] = useState(0);
   const [shadow, setShadow] = useState(0);
