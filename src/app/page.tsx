@@ -6,6 +6,7 @@ import { useState } from "react";
 import { ImageGenerator } from "./components/ImageGenerator";
 import InputFile from "./components/InputFile";
 import InputRange from "./components/InputRange";
+import DownloadButton from "./components/DownloadButton";
 
 export default function Home() {
   const [image, setImage] = useState<ImageState | undefined>(undefined);
@@ -50,8 +51,18 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="ml-1 w-96 card">
-        {image ? <ImageGenerator image={image} settings={settings} /> : null}
+      <div
+        className="ml-1 w-96 card"
+        style={{
+          maxWidth: "400",
+        }}
+      >
+        {image ? (
+          <>
+            <ImageGenerator image={image} settings={settings} />
+            <DownloadButton image={image} settings={settings} />
+          </>
+        ) : null}
       </div>
     </main>
   );

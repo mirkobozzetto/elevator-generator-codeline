@@ -19,6 +19,7 @@ const ImagePreview = ({ image, settings }: ImagePreviewProps) => {
             style={{
               boxShadow: `0 0 ${settings.shadow}px rgba(0,0,0,.${settings.shadow})`,
               borderRadius: `${settings.radius}px`,
+              maxWidth: "400",
             }}
           />
         </div>

@@ -36,3 +36,8 @@ export type ImageGeneratorProps = {
   settings: SettingsProps;
   image: ImageState;
 };
+
+export type DownloadButtonProps = {
+  image: ImageState;
+  settings: SettingsProps;
+};
