@@ -11,7 +11,7 @@ export default function Home() {
   const [image, setImage] = useState<ImageState | undefined>(undefined);
   const [settings, updateSetting] = useSettings({
     padding: 16,
-    shadow: 4,
+    shadow: 0,
     radius: 0,
   });
 
@@ -27,16 +27,16 @@ export default function Home() {
 
           <InputRange
             label="Padding"
-            min={0}
-            max={50}
+            min={10}
+            max={80}
             value={settings.padding}
             onChange={(e) => updateSetting("padding", Number(e.target.value))}
           />
 
           <InputRange
             label="Shadow"
-            min={0}
-            max={80}
+            min={10}
+            max={90}
             value={settings.shadow}
             onChange={(e) => updateSetting("shadow", Number(e.target.value))}
           />
@@ -44,7 +44,7 @@ export default function Home() {
           <InputRange
             label="Radius"
             min={0}
-            max={210}
+            max={240}
             value={settings.radius}
             onChange={(e) => updateSetting("radius", Number(e.target.value))}
           />
