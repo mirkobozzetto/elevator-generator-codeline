@@ -2,7 +2,6 @@ import { InputFileProps } from "@/types/types";
 
 const InputFile = ({ onChange }: InputFileProps) => (
   <label className="form-control w-full max-w-xs">
-    <span className="label-text"> </span>
     <input
       accept="image/*"
       type="file"

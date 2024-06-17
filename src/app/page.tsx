@@ -50,7 +50,7 @@ export default function Home() {
           />
         </div>
       </div>
-      <div className="ml-12 w-96 card">
+      <div className="ml-1 w-96 card">
         {image ? <ImageGenerator image={image} settings={settings} /> : null}
       </div>
     </main>

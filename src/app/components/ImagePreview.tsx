@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const ImagePreview = ({ image, settings }: ImagePreviewProps) => {
   return (
-    <>
+    <div className="border-gray-150 bg-transparent border w-fit h-fit overflow-hidden">
       {image && (
         <div
           style={{
@@ -23,7 +23,7 @@ const ImagePreview = ({ image, settings }: ImagePreviewProps) => {
           />
         </div>
       )}
-    </>
+    </div>
   );
 };
 
