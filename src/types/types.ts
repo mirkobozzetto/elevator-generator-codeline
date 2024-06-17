@@ -2,6 +2,12 @@ import { ChangeEvent } from "react";
 
 export type FileChangeEvent = ChangeEvent<HTMLInputElement>;
 
+export type SettingsProps = {
+  padding: number;
+  shadow: number;
+  radius: number;
+};
+
 export type InputFileProps = {
   onChange: (e: FileChangeEvent) => void;
 };

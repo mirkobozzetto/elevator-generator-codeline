@@ -1,6 +1,7 @@
 "use client";
 import { FileChangeEvent, ImageState } from "@/types/types";
 import { handleFileChange } from "@/utils/imagePreviewUtil";
+import useSettings from "@/utils/useSettings";
 import { useState } from "react";
 import ImagePreview from "./components/ImagePreview";
 import InputFile from "./components/InputFile";
@@ -8,9 +9,11 @@ import InputRange from "./components/InputRange";
 
 export default function Home() {
   const [image, setImage] = useState<ImageState | undefined>(undefined);
-  const [padding, setPadding] = useState(0);
-  const [shadow, setShadow] = useState(0);
-  const [radius, setRadius] = useState(0);
+  const [settings, updateSetting] = useSettings({
+    padding: 16,
+    shadow: 4,
+    radius: 0,
+  });
 
   const handleFileChangeWrapper = (e: FileChangeEvent) => {
     handleFileChange(e, setImage);
@@ -26,24 +29,24 @@ export default function Home() {
             label="Padding"
             min={0}
             max={100}
-            value={padding}
-            onChange={(e) => setPadding(Number(e.target.value))}
+            value={settings.padding}
+            onChange={(e) => updateSetting("padding", Number(e.target.value))}
           />
 
           <InputRange
             label="Shadow"
             min={0}
             max={100}
-            value={shadow}
-            onChange={(e) => setShadow(Number(e.target.value))}
+            value={settings.shadow}
+            onChange={(e) => updateSetting("shadow", Number(e.target.value))}
           />
 
           <InputRange
             label="Radius"
             min={0}
             max={360}
-            value={radius}
-            onChange={(e) => setRadius(Number(e.target.value))}
+            value={settings.radius}
+            onChange={(e) => updateSetting("radius", Number(e.target.value))}
           />
         </div>
       </div>
