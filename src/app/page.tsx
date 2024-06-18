@@ -8,6 +8,7 @@ import DownloadButton from "./components/DownloadButton";
 import { ImageGenerator } from "./components/ImageGenerator";
 import InputFile from "./components/InputFile";
 import InputRange from "./components/InputRange";
+import ResvgInitializer from "./components/ResvgInitializer";
 
 export default function Home() {
   const [image, setImage] = useState<ImageState | undefined>(undefined);
@@ -23,7 +24,8 @@ export default function Home() {
 
   return (
     <>
-      {/* <WasmInitializer /> */}
+      <ResvgInitializer />
+
       <main className="flex lg:flex-row flex-col justify-center items-center gap-8 m-auto max-w-4xl min-h-full">
         <div className="bg-indigo-100 shadow-xl w-96 card">
           <div className="card-body">

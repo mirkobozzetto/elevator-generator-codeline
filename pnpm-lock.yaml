@@ -12,8 +12,8 @@ importers:
         specifier: ^2.6.2
         version: 2.6.2
       '@resvg/resvg-wasm':
-        specifier: ^2.6.2
-        version: 2.6.2
+        specifier: 2.0.0-alpha.4
+        version: 2.0.0-alpha.4
       '@types/sharp':
         specifier: ^0.32.0
         version: 0.32.0
@@ -401,8 +401,8 @@ packages:
     resolution: {integrity: sha512-xBaJish5OeGmniDj9cW5PRa/PtmuVU3ziqrbr5xJj901ZDN4TosrVaNZpEiLZAxdfnhAe7uQ7QFWfjPe9d9K2Q==}
     engines: {node: '>= 10'}
 
-  '@resvg/resvg-wasm@2.6.2':
-    resolution: {integrity: sha512-FqALmHI8D4o6lk/LRWDnhw95z5eO+eAa6ORjVg09YRR7BkcM6oPHU9uyC0gtQG5vpFLvgpeU4+zEAz2H8APHNw==}
+  '@resvg/resvg-wasm@2.0.0-alpha.4':
+    resolution: {integrity: sha512-pWIG9a/x1ky8gXKRhPH1OPKpHFoMN1ISLbJ+O+gPXQHIAKhNd5I28RlWf7q576hAOQA9JZTlo3p/M2uyLzJmmw==}
     engines: {node: '>= 10'}
 
   '@rushstack/eslint-patch@1.10.3':
@@ -2320,7 +2320,7 @@ snapshots:
       '@resvg/resvg-js-win32-ia32-msvc': 2.6.2
       '@resvg/resvg-js-win32-x64-msvc': 2.6.2
 
-  '@resvg/resvg-wasm@2.6.2': {}
+  '@resvg/resvg-wasm@2.0.0-alpha.4': {}
 
   '@rushstack/eslint-patch@1.10.3': {}
 
