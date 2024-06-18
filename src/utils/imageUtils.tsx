@@ -1,5 +1,5 @@
 import { ImageState, SettingsProps } from "@/types/types";
-import { Resvg, ResvgRenderOptions } from "@resvg/resvg-wasm";
+import { Canvg } from "canvg";
 import Image from "next/image";
 import satori from "satori";
 
@@ -25,24 +25,21 @@ export async function generateSVG(
 
   return svg;
 }
+
 export async function convertSVGToPNG(
   svg: string,
   width: number,
   height: number
-): Promise<Uint8Array> {
-  const opts: ResvgRenderOptions = {
-    fitTo: {
-      mode: "zoom",
-      value: width,
-    },
-    font: {
-      loadSystemFonts: false,
-    },
-  };
+): Promise<string> {
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
 
-  const resvg = new Resvg(svg, opts);
-  const pngData = resvg.render();
-  const pngBuffer = pngData.asPng();
+  const context = canvas.getContext("2d");
+  if (context) {
+    const canvgInstance = Canvg.fromString(context, svg);
+    await canvgInstance.start();
+  }
 
-  return pngBuffer;
+  return canvas.toDataURL("image/png");
 }
