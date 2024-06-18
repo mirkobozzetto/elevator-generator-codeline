@@ -1,20 +1,20 @@
 import { DownloadButtonProps } from "@/types/types";
-import { renderPNG } from "@/utils/renderPNG";
+import { generateSVG } from "@/utils/imageUtils";
 
 const DownloadButton = ({ image, settings }: DownloadButtonProps) => {
   const handleDownload = async () => {
-    const pngData: { png: Blob } = (await renderPNG({ image, settings })) as {
-      png: Blob;
-    };
+    try {
+      const svg = await generateSVG(image, settings);
+      console.log("Generated SVG:", svg);
 
-    if (pngData) {
-      const url = URL.createObjectURL(
-        new Blob([pngData.png], { type: "image/png" })
-      );
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${image.name}.png`;
-      link.click();
+      // const blob = new Blob([pngBuffer], { type: "image/png" }); // creer un blob mais autrement
+      //   const url = URL.createObjectURL(blob);
+      //   const link = document.createElement("a");
+      //   link.href = url;
+      //   link.download = `${image.name}.png`;
+      //   link.click();
+    } catch (error) {
+      console.error("Error generating SVG or converting to PNG:", error);
     }
   };
 
