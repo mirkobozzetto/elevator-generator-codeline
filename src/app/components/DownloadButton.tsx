@@ -1,4 +1,3 @@
-// components/DownloadButton.tsx
 import { DownloadButtonProps } from "@/types/types";
 import { convertSVGToPNG, generateSVG } from "@/utils/imageUtils";
 
