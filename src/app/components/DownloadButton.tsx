@@ -1,5 +1,5 @@
 import { DownloadButtonProps } from "@/types/types";
-import { generateSVG } from "@/utils/imageUtils";
+import { convertSVGToPNG, generateSVG } from "@/utils/imageUtils";
 
 const DownloadButton = ({ image, settings }: DownloadButtonProps) => {
   const handleDownload = async () => {
@@ -7,16 +7,13 @@ const DownloadButton = ({ image, settings }: DownloadButtonProps) => {
       const svg = await generateSVG(image, settings);
       console.log("Generated SVG:", svg);
 
-      const pngDataUrl = await generateSVG(
-        svg,
-        image.width + settings.padding * 2,
-        image.height + settings.padding * 2
-      );
-      const pngData = await fetch(pngDataUrl).then((res) => res.arrayBuffer());
-      const blob = new Blob([pngData], { type: "image/png" });
-      const url = URL.createObjectURL(blob);
+      const dimensions = {
+        width: image.width + settings.padding * 2,
+        height: image.height + settings.padding * 2,
+      };
+      const pngDataUrl = await convertSVGToPNG(svg, dimensions);
       const link = document.createElement("a");
-      link.href = url;
+      link.href = pngDataUrl;
       link.download = `${image.name}.png`;
       link.click();
     } catch (error) {
