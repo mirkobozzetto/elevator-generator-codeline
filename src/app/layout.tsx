@@ -10,7 +10,7 @@ const inter = Raleway({
 
 export const metadata: Metadata = {
   title: "Elevator Generator",
-  description: "workshop-useState-elevator-generator",
+  description: "Elevator-Generator",
 };
 
 export default function RootLayout({
