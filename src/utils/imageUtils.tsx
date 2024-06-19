@@ -1,7 +1,49 @@
-import { Dimensions, ImageState, SettingsProps } from "@/types/types";
-import { Canvg } from "canvg";
-import Image from "next/image";
+import { ImageState, SettingsProps } from "@/types/types";
 import satori from "satori";
+
+// export async function generateSVG(
+//   image: ImageState,
+//   settings: SettingsProps
+// ): Promise<string> {
+//   const svg = await satori(
+//     <div
+//       style={{
+//         display: "flex",
+//         padding: `${settings.padding}px`,
+//       }}
+//     >
+//       <div
+//         style={{
+//           boxShadow: `0 0 ${settings.shadow}px rgba(0, 0, 0, ${
+//             settings.shadow / 100
+//           })`,
+//           borderRadius: `${settings.radius}px`,
+//           maxWidth: "400px",
+//           display: "flex",
+//         }}
+//       >
+//         <Image
+//           src={image.src}
+//           width={image.width}
+//           height={image.height}
+//           alt={image.name ?? ""}
+//         />
+//       </div>
+//     </div>,
+//     {
+//       width: image.width + settings.padding * 2,
+//       height: image.height + settings.padding * 2,
+//       fonts: [],
+//     }
+//   );
+
+//   // const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${image.width}" height="${image.height}">
+//   //   <rect width="100%" height="100%" fill="red" />
+//   // </svg>`;
+
+//   console.log("Generated SVG:", svg);
+//   return svg;
+// }
 
 export async function generateSVG(
   image: ImageState,
@@ -24,11 +66,14 @@ export async function generateSVG(
           display: "flex",
         }}
       >
-        <Image
+        <img
           src={image.src}
           width={image.width}
           height={image.height}
           alt={image.name ?? ""}
+          style={{
+            borderRadius: `${settings.radius}px`,
+          }}
         />
       </div>
     </div>,
@@ -43,23 +88,57 @@ export async function generateSVG(
   return svg;
 }
 
-export async function convertSVGToPNG(
-  svg: string,
-  dimensions: Dimensions
-): Promise<string> {
-  const canvas = document.createElement("canvas");
-  canvas.width = dimensions.width;
-  canvas.height = dimensions.height;
-
-  const context = canvas.getContext("2d");
-  if (context) {
-    const canvgInstance = Canvg.fromString(context, svg);
-    await canvgInstance.start();
-
-    // Vérification supplémentaire
-    const dataUrl = canvas.toDataURL();
-    console.log("Canvas data URL:", dataUrl);
+export const convertSVGToPNGWorker = async ({
+  svg,
+  width,
+}: {
+  svg: string;
+  width: number;
+}): Promise<Blob> => {
+  if (typeof window === "undefined") {
+    throw new Error(
+      "convertSVGToPNGWorker can only be used in a browser environment"
+    );
   }
 
-  return canvas.toDataURL("image/png");
+  const worker = new Worker(new URL("./resvg-worker.ts", import.meta.url), {
+    type: "module",
+  });
+  let wasmInitialized = false;
+
+  return new Promise<Blob>((resolve, reject) => {
+    worker.onmessage = (e: MessageEvent) => {
+      if (e.data.type === "wasmInitialized") {
+        wasmInitialized = true;
+        worker.postMessage({ _id: Math.random(), svg, width });
+      } else if (e.data.blob) {
+        resolve(e.data.blob);
+      } else if (e.data.error) {
+        console.error("Error from worker:", e.data.error);
+        reject(new Error(e.data.error));
+      }
+    };
+
+    worker.onerror = (error) => {
+      console.error("Worker error:", error);
+      reject(error);
+    };
+
+    if (wasmInitialized) {
+      worker.postMessage({ _id: Math.random(), svg, width });
+    }
+  });
+};
+
+export async function convertSVGToPNG(
+  svg: string,
+  width: number
+): Promise<Blob> {
+  try {
+    const pngBlob = await convertSVGToPNGWorker({ svg, width });
+    return pngBlob;
+  } catch (error) {
+    console.error("Error converting SVG to PNG:", error);
+    return new Blob();
+  }
 }

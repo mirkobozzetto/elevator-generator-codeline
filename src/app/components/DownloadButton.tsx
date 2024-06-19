@@ -7,15 +7,23 @@ const DownloadButton = ({ image, settings }: DownloadButtonProps) => {
       const svg = await generateSVG(image, settings);
       console.log("Generated SVG:", svg);
 
-      const dimensions = {
-        width: image.width + settings.padding * 2,
-        height: image.height + settings.padding * 2,
-      };
-      const pngDataUrl = await convertSVGToPNG(svg, dimensions);
+      const pngBlob = await convertSVGToPNG(
+        svg,
+        image.width + settings.padding * 2
+      );
+      console.log("Converted to PNG blob:", pngBlob);
+
+      if (!pngBlob || pngBlob.size === 0) {
+        throw new Error("Failed to generate PNG: Blob is empty.");
+      }
+
+      const url = URL.createObjectURL(pngBlob);
       const link = document.createElement("a");
-      link.href = pngDataUrl;
+      link.href = url;
       link.download = `${image.name}.png`;
       link.click();
+
+      URL.revokeObjectURL(url); // Clean up after download
     } catch (error) {
       console.error("Error generating SVG or converting to PNG:", error);
     }
