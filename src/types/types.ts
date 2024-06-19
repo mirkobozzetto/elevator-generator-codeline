@@ -30,7 +30,6 @@ export type ImageState = {
   height: number;
   src: string;
   name: string | undefined;
-  // svg: string | undefined;
 };
 
 export type ImageGeneratorProps = {
@@ -41,6 +40,7 @@ export type ImageGeneratorProps = {
 export type DownloadButtonProps = {
   image: ImageState;
   settings: SettingsProps;
+  // setPngBlob: React.Dispatch<React.SetStateAction<Blob | null>>;
 };
 
 export type Dimensions = {
