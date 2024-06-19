@@ -5,11 +5,18 @@ export async function generateSVG(
   image: ImageState,
   settings: SettingsProps
 ): Promise<string> {
+  const effectiveRadius =
+    Math.min(image.width, image.height) / 2 + settings.padding;
+
   const svg = await satori(
     <div
       style={{
         display: "flex",
         padding: `${settings.padding}px`,
+        justifyContent: "center",
+        alignItems: "center",
+        width: `${image.width + settings.padding * 2}px`,
+        height: `${image.height + settings.padding * 2}px`,
       }}
     >
       <div
@@ -17,8 +24,10 @@ export async function generateSVG(
           boxShadow: `0 0 ${settings.shadow}px rgba(0, 0, 0, ${
             settings.shadow / 100
           })`,
-          borderRadius: `${settings.radius}px`,
-          maxWidth: "400px",
+          borderRadius: `${effectiveRadius}px`,
+          width: `${image.width}px`,
+          height: `${image.height}px`,
+          overflow: "hidden",
           display: "flex",
         }}
       >
@@ -28,7 +37,8 @@ export async function generateSVG(
           height={image.height}
           alt={image.name ?? ""}
           style={{
-            borderRadius: `${settings.radius}px`,
+            display: "block",
+            // borderRadius: `${settings.radius}px`,
           }}
         />
       </div>

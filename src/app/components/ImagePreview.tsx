@@ -1,5 +1,4 @@
 import { ImagePreviewProps } from "@/types/types";
-import Image from "next/image";
 
 const ImagePreview = ({ image, settings }: ImagePreviewProps) => {
   return (
@@ -11,7 +10,7 @@ const ImagePreview = ({ image, settings }: ImagePreviewProps) => {
             padding: `${settings.padding}px`,
           }}
         >
-          <Image
+          <img
             src={image.src}
             alt={image.name ?? ""}
             width={image.width}
