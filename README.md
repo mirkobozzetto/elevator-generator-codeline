@@ -1,8 +1,7 @@
-# Elevator Image Generator
-
 https://elevator-generator-codeline.vercel.app/
 
 ## Introduction
+
 Ce projet est un défi proposé par la plateforme Codeline, axé sur la création d'un générateur d'images nommé "Elevator Image Generator".
 
 L'objectif principal de ce projet était de développer une application web qui permet aux utilisateurs de manipuler des images via une interface utilisateur interactive, en intégrant des fonctionnalités telles que le téléchargement et la copie d'images traitées.
