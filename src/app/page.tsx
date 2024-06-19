@@ -64,7 +64,20 @@ export default function Home() {
               <ImageGenerator image={image} settings={settings} />
               <DownloadButton image={image} settings={settings} />
             </>
-          ) : null}
+          ) : (
+            <>
+              <div className="bg-transparent rounded-xl text-xl overflow-hidden card-body">
+                <p className="text-center text-gray-500">
+                  No image selected. <br />
+                  Please upload an image.
+                </p>
+              </div>
+
+              <button className="mt-4 cursor-auto btn btn-active btn-ghost">
+                Download Image
+              </button>
+            </>
+          )}
         </div>
       </main>
     </>
