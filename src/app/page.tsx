@@ -73,9 +73,14 @@ export default function Home() {
                 </p>
               </div>
 
-              <button className="mt-4 cursor-auto btn btn-active btn-ghost">
-                Download Image
-              </button>
+              <div className="flex justify-between">
+                <button className="flex-1 mt-4 mr-2 cursor-auto btn btn-active btn-ghost">
+                  Download Image
+                </button>
+                <button className="flex-1 mt-4 ml-2 cursor-auto btn btn-active btn-ghost">
+                  Copy
+                </button>
+              </div>
             </>
           )}
         </div>

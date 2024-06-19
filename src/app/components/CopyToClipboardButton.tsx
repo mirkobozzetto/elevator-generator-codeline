@@ -10,10 +10,18 @@ const CopyToClipboardButton = ({ imageBlob }: CopyToClipboardButtonProps) => {
   const [copying, setCopying] = useState(false);
 
   const handleCopy = async () => {
-    if (!imageBlob) return;
+    if (!imageBlob) return; // Do nothing if there is no image blob
 
     setCopying(true);
     try {
+      if (!navigator.clipboard || !ClipboardItem) {
+        console.error("Clipboard API or ClipboardItem is not available");
+        toast.error(
+          "Clipboard functionality is not available in this browser."
+        );
+        return;
+      }
+
       await navigator.clipboard.write([
         new ClipboardItem({ "image/png": imageBlob }),
       ]);
@@ -33,7 +41,7 @@ const CopyToClipboardButton = ({ imageBlob }: CopyToClipboardButtonProps) => {
       disabled={!imageBlob || copying}
     >
       {copying ? (
-        <span className="loading loading-sm loading-spinner" />
+        <span className="loading loading-sm loading-spinner"></span>
       ) : (
         "Copy Image"
       )}

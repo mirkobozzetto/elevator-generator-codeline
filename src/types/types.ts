@@ -40,7 +40,7 @@ export type ImageGeneratorProps = {
 export type DownloadButtonProps = {
   image: ImageState;
   settings: SettingsProps;
-  // setPngBlob: React.Dispatch<React.SetStateAction<Blob | null>>;
+  setPngBlob: React.Dispatch<React.SetStateAction<Blob | null>>;
 };
 
 export type Dimensions = {
