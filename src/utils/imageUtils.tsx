@@ -1,50 +1,6 @@
 import { ImageState, SettingsProps } from "@/types/types";
 import satori from "satori";
 
-// export async function generateSVG(
-//   image: ImageState,
-//   settings: SettingsProps
-// ): Promise<string> {
-//   const svg = await satori(
-//     <div
-//       style={{
-//         display: "flex",
-//         padding: `${settings.padding}px`,
-//       }}
-//     >
-//       <div
-//         style={{
-//           boxShadow: `0 0 ${settings.shadow}px rgba(0, 0, 0, ${
-//             settings.shadow / 100
-//           })`,
-//           borderRadius: `${settings.radius}px`,
-//           maxWidth: "400px",
-//           display: "flex",
-//         }}
-//       >
-//         <Image
-//           src={image.src}
-//           width={image.width}
-//           height={image.height}
-//           alt={image.name ?? ""}
-//         />
-//       </div>
-//     </div>,
-//     {
-//       width: image.width + settings.padding * 2,
-//       height: image.height + settings.padding * 2,
-//       fonts: [],
-//     }
-//   );
-
-//   // const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${image.width}" height="${image.height}">
-//   //   <rect width="100%" height="100%" fill="red" />
-//   // </svg>`;
-
-//   console.log("Generated SVG:", svg);
-//   return svg;
-// }
-
 export async function generateSVG(
   image: ImageState,
   settings: SettingsProps
