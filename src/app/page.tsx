@@ -4,7 +4,7 @@ import { FileChangeEvent, ImageState } from "@/types/types";
 import { handleFileChange } from "@/utils/imagePreviewUtil";
 import useSettings from "@/utils/useSettings";
 import { useState } from "react";
-import DownloadButton from "./components/DownloadButton";
+import ImageActions from "./components/ImageActions";
 import { ImageGenerator } from "./components/ImageGenerator";
 import InputFile from "./components/InputFile";
 import InputRange from "./components/InputRange";
@@ -62,7 +62,11 @@ export default function Home() {
           {image ? (
             <>
               <ImageGenerator image={image} settings={settings} />
-              <DownloadButton image={image} settings={settings} />
+              <ImageActions image={image} settings={settings} />
+              {/* <div className="flex justify-center items-center">
+                <DownloadButton image={image} settings={settings} />
+                <DownloadButton image={image} settings={settings} />
+              </div> */}
             </>
           ) : (
             <>
@@ -74,10 +78,10 @@ export default function Home() {
               </div>
 
               <div className="flex justify-between">
-                <button className="flex-1 mt-4 mr-2 cursor-auto btn btn-active btn-ghost">
+                <button className="flex-1 mt-4 mr-2 text-xs cursor-auto btn btn-active btn-ghost">
                   Download Image
                 </button>
-                <button className="flex-1 mt-4 ml-2 cursor-auto btn btn-active btn-ghost">
+                <button className="flex-1 mt-4 text-xs cursor-auto btn btn-active btn-ghost">
                   Copy
                 </button>
               </div>

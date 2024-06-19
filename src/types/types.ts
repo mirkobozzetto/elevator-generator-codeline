@@ -37,10 +37,16 @@ export type ImageGeneratorProps = {
   image: ImageState;
 };
 
-export type DownloadButtonProps = {
+// export type DownloadButtonProps = {
+//   image: ImageState;
+//   settings: SettingsProps;
+//   // setPngBlob: React.Dispatch<React.SetStateAction<Blob | null>>;
+// };
+
+export type ImageActionProps = {
   image: ImageState;
   settings: SettingsProps;
-  setPngBlob: React.Dispatch<React.SetStateAction<Blob | null>>;
+  setPngBlob?: React.Dispatch<React.SetStateAction<Blob | null>>;
 };
 
 export type Dimensions = {
